@@ -1,11 +1,13 @@
-const applicationRoutes = [
+import Login from './views/Login';
+
+const ngcsRoutes = [
     {
-        path: 'page1',
-        name: 'page de tests',
+        path: '/signin',
+        name: 'Signin',
         icon: null,
-        component: null,
-        layout: '/admin'
+        component: Login,
+        layout: '/auth'
     }
 ];
 
-export default applicationRoutes;
+export default ngcsRoutes;
