@@ -1,3 +1,14 @@
+@font-face {
+    font-family: 'Naval Group';
+    src: url("../fonts/NavalGroupSans-Regular.woff2");
+  }
+  
+@font-face {
+    font-family: 'Naval Group';
+    src: url("../fonts/NavalGroupSans-Bold.woff2");
+    font-weight: bold;
+}
+  
 html * {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -6,7 +17,7 @@ html * {
     background-color: #eeeeee;
     color: #3c4858;
     margin: 0;
-    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Naval Group', Roboto, Helvetica, Arial, sans-serif;
     font-weight: 300;
     line-height: 1.5em;
   }
@@ -68,7 +79,7 @@ html * {
   h4,
   h5,
   h6 {
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-family: "Naval Group", "Roboto", "Helvetica", "Arial", sans-serif;
     font-weight: 300;
     line-height: 1.5em;
   }

@@ -1,8 +1,17 @@
+@font-face {
+  font-family: 'Naval Group';
+  src: url("assets/fonts/NavalGroupSans-Regular.woff2");
+}
+
+@font-face {
+  font-family: 'Naval Group';
+  src: url("assets/fonts/NavalGroupSans-Bold.woff2");
+  font-weight: bold;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Naval Group';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
