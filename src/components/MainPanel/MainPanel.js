@@ -1,52 +1,65 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import {Toolbar, Typography} from '@material-ui/core';
-import {Switch, Route} from 'react-router-dom';
+import { Typography } from '@material-ui/core';
+import { Switch, Route } from 'react-router-dom';
 const styles = theme => ({
     root: {
         flexGrow: 1,
+        height: '100%',
     },
     content: {
         flexGrow: 1,
         padding: theme.spacing(3),
-      },
+        background: '#F9F9FC'
+    },
     footer: {
         textAlign: "center",
         margin: theme.spacing(3),
         padding: theme.spacing(2),
         borderStyle: "solid none none none",
         border: 1,
-        borderColor: "lightgray"
+        borderColor: "lightgray",
     }
 });
 
-const MainPanel = withStyles(styles)(
-    class extends Component {
-        render() {
-            const { classes, routes } = this.props;
-            return (
-                <main className={classes.content}>
-                    <Toolbar/>
-                    <div className={classes.root}>
-                        <Switch>
-                            {routes.map((route,index) => (
-                                <Route exact path={route.path} key={route.name}>{route.view}</Route>
-                            ))}
-                        </Switch>
-                    </div>
-                    <footer className={classes.footer}>
+class MainPanel extends Component {
+    getRoutes = () => {
+        const { routes, basePath } = this.props;
+        if (routes) {
+            return routes.map((route, index) => {
+                if (route.layout === basePath) {
+                    return (
+                        <Route exact path={route.layout + route.path} key={route.name}>{route.component}</Route>
+                    )
+                } else {
+                    return null;
+                }
+            });
+        }
+    }
+
+    render() {
+        const { classes } = this.props;
+        return (
+            <div className={classes.content}>
+                <div className={classes.root}>
+                    <Switch>
+                        {this.getRoutes()}
+                    </Switch>
+                </div>
+                <footer className={classes.footer}>
                     <hl></hl>
                     <span>
                         <Typography variant="subtitle2">
                             &copy; {1900 + new Date().getYear()}{" "}
-                            Ludovic Stumme, made for whatever you need !
+                            Ludovic Stumme, made for whatever we need !
                         </Typography>
                     </span>
-                    </footer>
+                </footer>
 
-                </main>
-            );
-        }
-    });
+            </div>
+        );
+    }
+};
 
-export default MainPanel;
+export default withStyles(styles)(MainPanel);

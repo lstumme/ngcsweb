@@ -2,11 +2,10 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import './assets/css/application.css';
-import MainLayout from './layouts/MainLayout';
-import OutLayout from './layouts/OutLayout';
-import AppLayout from './layouts/AppLayout';
-
+// import './assets/css/application.css';
+import './index.css';
+import { MainLayout, OutLayout } from './layouts';
+import routes from './routes'
 
 const theme = createMuiTheme({
   typography: {
@@ -37,7 +36,7 @@ ReactDOM.render(
         <Switch>
           <Redirect exact from="/" to="/auth" />
           <Route path="/auth" component={OutLayout} />
-          <Route paht='/ngcs' component={MainLayout} />
+          <Route path='/ngcs' render={(props) => (<MainLayout {...props} basePath='/ngcs' routes={routes} />)} />
         </Switch>
       </BrowserRouter>
     </ThemeProvider>

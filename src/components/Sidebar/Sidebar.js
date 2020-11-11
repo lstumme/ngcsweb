@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import {
     Drawer,
     Toolbar,
@@ -11,9 +11,9 @@ import {
     ListItemIcon
 } from '@material-ui/core'
 
-const drawerWidth = 240;
+const drawerWidth = 220;
 
-const useStyles = makeStyles((theme) => ({
+const styles = (theme) => ({
     root: {
         display: 'flex',
     },
@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
         }),
+        background: "#F9F9FC"
     },
     drawerClose: {
         transition: theme.transitions.create('width', {
@@ -43,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
         }),
         overflowX: 'hidden',
         width: theme.spacing(7) + 1,
+        background: "#F9F9FC"
     },
     toolbar: {
         display: 'flex',
@@ -56,47 +58,65 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         padding: theme.spacing(3),
     },
-}));
+    icon: {
+        color: '#1F4492'
+    },
+    itemText: {
+        primary: '#1F4492',
+        secondary: '#1F4492'
+    }
+});
 
-const Sidebar = (props) => {
-    const classes = useStyles();
 
-    const { state, routes } = props;
+class Sidebar extends Component {
+    state = {
+        open: true
+    }
 
-    const [open, setOpen] = React.useState(true);
-
-    React.useEffect(() => {
-        setOpen(state);
-    }, [state]);
-
-    return (
-        <Drawer
-            variant="permanent"
-            className={clsx(classes.drawer, {
-                [classes.drawerOpen]: open,
-                [classes.drawerClose]: !open,
-            })}
-            classes={{
-                paper: clsx({
-                    [classes.drawerOpen]: open,
-                    [classes.drawerClose]: !open,
-                }),
-            }}>
-            <Toolbar />
-            <div>
-                <List>
-                    {routes.map((route, index) => (
-                        <Link to={route.path} style={{ textDecoration: 'none' }} key={route.name}>
+    getRoutesDefinition() {
+        const { routes, target, classes } = this.props;
+        console.log(routes);
+        if (routes) {
+            return routes.map((route, index) => {
+                if (route.target === target) {
+                    return (
+                        <Link to={route.layout + route.path} style={{ textDecoration: 'none' }} key={route.name}>
                             <ListItem button key={route.name}>
-                                <ListItemIcon>{route.icon}</ListItemIcon> 
-                                <ListItemText primary={route.name} />
+                                <ListItemIcon className={classes.icon}>{route.icon}</ListItemIcon>
+                                <ListItemText classes={{ primary: classes.icon }} primary={route.name} />
                             </ListItem>
                         </Link>
-                    ))}
-                </List>
-            </div>
-        </Drawer>
-    );
-};
+                    )
+                }
+            })
+        }
+    }
 
-export default Sidebar;
+    render() {
+        const { collapsed, classes } = this.props;
+        return (
+            <Drawer
+                variant="permanent"
+                className={clsx(classes.drawer, {
+                    [classes.drawerOpen]: collapsed,
+                    [classes.drawerClose]: !collapsed,
+                })}
+                classes={{
+                    paper: clsx({
+                        [classes.drawerOpen]: collapsed,
+                        [classes.drawerClose]: !collapsed,
+                    }),
+                }}>
+                <Toolbar />
+                <div>
+                    <List>
+                        {this.getRoutesDefinition()}
+                    </List>
+                </div>
+            </Drawer>
+        );
+    };
+}
+
+
+export default withStyles(styles)(Sidebar);
