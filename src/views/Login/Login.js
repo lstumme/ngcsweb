@@ -6,6 +6,9 @@ import {
 } from '@material-ui/core';
 
 import { AccountCircle, LockRounded } from '@material-ui/icons';
+import {connect} from 'react-redux';
+
+import * as actions from '../../store/actions';
 
 const styles = theme => ({
     card: {
@@ -35,11 +38,16 @@ class Login extends Component {
         console.log(this.state);
     }
 
+    submitHandler = (event) => {
+        event.preventDefault();
+        this.props.onAuth(this.state.login, this.state.password);
+    }
+
     render() {
         const { classes } = this.props;
 
         return (
-            <form>
+            <form onSubmit={this.submitHandler}>
                 <Card className={classes.card} elevation={5}>
                     <img src="/static/virtualship.png" width="350" height="63" size="cover" alt="Digital Ship" />
                     <CardContent>
@@ -72,7 +80,7 @@ class Login extends Component {
                                 onChange={this.onChangeHandler("password")}
                             />
                             <div style={{ height: 20 }} />
-                            <Button color="primary" variant="contained">LOG IN</Button>
+                            <Button type="submit" color="primary" variant="contained">LOG IN</Button>
                         </div>
                     </CardContent>
                 </Card>
@@ -81,5 +89,17 @@ class Login extends Component {
     }
 }
 
-export default withStyles(styles)(Login);
+const mapStateToProps = state => {
+    return {
+        isAlreadyAuth: state.isAuth
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (login, password) => dispatch(actions.auth(login, password))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Login));
 

@@ -20,6 +20,8 @@ class HomeView extends Component {
                     Aussi, merci de ne pas rentrer de données métiers qui seraient suceptibles de pouvoir 
                     être exploitées par d'autres ...
                 </p>
+                <br/>
+                <p>Have fun !!!</p>
             </div>
         );
     }

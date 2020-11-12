@@ -23,7 +23,7 @@ class MainLayout extends Component {
         const { routes, basePath, classes } = this.props;
         return (
             <div className={classes.root}>
-                <AppToolbar target="AppBar" appTitle="SIMULATION MANAGER" stateChanged={this.handleToolbarState} />
+                <AppToolbar target="AppBar" routes={routes} appTitle="SIMULATION MANAGER" stateChanged={this.handleToolbarState} />
                 <Sidebar collapsed={this.state.open} routes={routes} target="SideBar" />
                 <MainPanel routes={routes} basePath={basePath}></MainPanel>
             </div>

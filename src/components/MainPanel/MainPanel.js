@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 const styles = theme => ({
     root: {
         flexGrow: 1,
@@ -38,13 +38,23 @@ class MainPanel extends Component {
         }
     }
 
+    getFirstRoute() {
+        const {routes, basePath} = this.props;
+        for(let i = 0; i < routes.length; i++) {
+            if(routes[i].layout === basePath) {
+                return routes[i].layout + routes[i].path;
+            }
+        }
+    }
+
     render() {
-        const { classes } = this.props;
+        const { classes, basePath } = this.props;
         return (
             <div className={classes.content}>
                 <div className={classes.root}>
                     <Switch>
                         {this.getRoutes()}
+                        <Redirect from={basePath} to={this.getFirstRoute()}/>
                     </Switch>
                 </div>
                 <footer className={classes.footer}>

@@ -72,10 +72,10 @@ const ngcsRoutes = [
     },
     {
         path: '/disconnect',
-        name: 'Déconnexion',
+        name: 'Deconnexion',
         icon: null,
         component: <DefaultView/>,
-        mayout: '/ngcs',
+        layout: '/ngcs',
         target: 'AppBar'
     }
 ];
