@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from 'axios';
+import axios from '../../server/axios-server';
 
 export const authStart = () => {
     return {
@@ -8,9 +8,7 @@ export const authStart = () => {
 };
 
 export const authSuccess = (userId, token) => {
-    console.log('Auth Success');
-    console.log('UserId : ' + userId);
-    console.log('Token : ' + token);
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
     return {
         type: actionTypes.AUTH_SUCCESS,
         userId: userId,
@@ -27,10 +25,9 @@ export const authFail = (error) => {
 };
 
 export const auth = (login, password) => {
-    console.log('auth called');
     return dispatch => {
         dispatch(authStart());
-        axios.post('https://ngcsserver.herokuapp.com/login', {login: login, password: password})
+        axios.post('/login', {login: login, password: password})
             .then(result => {
                 console.log(result.data.data);
                 dispatch(authSuccess(result.data.data.userId, result.data.data.token));
@@ -41,3 +38,10 @@ export const auth = (login, password) => {
             })
     }
 };
+
+export const logout = () => {
+    axios.defaults.headers.common['Authorization'] = null;
+    return {
+        type: actionTypes.AUTH_DISCONNECT
+    }
+}

@@ -4,7 +4,7 @@ import {
     DefaultView, 
     HomeView,
     UsersView
-} from './views';
+} from '../../views';
 
 const ngcsRoutes = [
     {
@@ -70,14 +70,6 @@ const ngcsRoutes = [
         layout: '/ngcs',
         target: 'AppBar'
     },
-    {
-        path: '/disconnect',
-        name: 'Deconnexion',
-        icon: null,
-        component: <DefaultView/>,
-        layout: '/ngcs',
-        target: 'AppBar'
-    }
 ];
 
 export default ngcsRoutes;

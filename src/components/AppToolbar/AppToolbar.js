@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import { Notifications, AccountCircle, RouterSharp } from '@material-ui/icons';
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions';
 
 import {
     List as ListIcon,
@@ -53,6 +55,11 @@ class AppToolbar extends Component {
 
     handleProfileMenuClose = (event) => {
         this.setState({ anchorE1: null });
+    }
+
+    handleDisconnection = (event) => {
+        this.setState({anchorE1: null});
+        this.props.onDisconnect();
     }
 
     getMenuRoutes = () => {
@@ -118,6 +125,7 @@ class AppToolbar extends Component {
                                 onClose={this.handleProfileMenuClose}
                             >
                                 {this.getMenuRoutes()}
+                                <MenuItem onClick={this.handleDisconnection}>Deconnexion</MenuItem>
                             </Menu>
                         </div>
                     </Toolbar>
@@ -127,4 +135,17 @@ class AppToolbar extends Component {
     }
 };
 
-export default withStyles(styles)(AppToolbar);
+// const mapStateToProps = state => {
+//     return {
+//         isAlreadyAuth: state.isAuth
+//     }
+// }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onDisconnect: () => dispatch(actions.logout())
+    }
+}
+
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(AppToolbar));

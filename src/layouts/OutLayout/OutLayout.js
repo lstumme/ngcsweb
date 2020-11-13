@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Switch, Route, Redirect } from "react-router-dom";
-import routes from '../../routes';
+import routes from '../../components/RoutesManager/routes';
 import { Grid } from '@material-ui/core';
 
 const switchRoutes = (

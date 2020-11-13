@@ -2,16 +2,13 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-
+import { RoutesManager } from './components';
 
 // import './assets/css/application.css';
 import './index.css';
-import { MainLayout, OutLayout } from './layouts';
-import routes from './routes';
-import authReducer from './store/reducers/auth';
+import { AuthReducer, UsersReducer } from './store/reducers';
 
 const theme = createMuiTheme({
   typography: {
@@ -35,21 +32,18 @@ const theme = createMuiTheme({
   }
 });
 const rootReducer = combineReducers({
-  auth: authReducer
+  auth: AuthReducer,
+  users: UsersReducer
 });
+
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
+console.log('Adresse du serveur : ' + process.env.REACT_APP_NGCS_SERVER);
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <Switch>
-            <Redirect exact from="/" to="/auth" />
-            <Route path="/auth" component={OutLayout} />
-            <Route path='/ngcs' render={(props) => (<MainLayout {...props} basePath='/ngcs' routes={routes} />)} />
-          </Switch>
-        </BrowserRouter>
+        <RoutesManager />
       </ThemeProvider>
     </Provider>
   </React.StrictMode>,
