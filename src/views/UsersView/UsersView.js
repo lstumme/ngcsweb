@@ -46,6 +46,9 @@ class UsersView extends Component {
 
     }
 
+    newUser() {
+    }
+
     render() {
         const { classes } = this.props;
         return (

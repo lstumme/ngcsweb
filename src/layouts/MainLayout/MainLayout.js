@@ -24,7 +24,7 @@ class MainLayout extends Component {
         return (
             <div className={classes.root}>
                 <AppToolbar target="AppBar" routes={routes} appTitle="SIMULATION MANAGER" stateChanged={this.handleToolbarState} />
-                <Sidebar collapsed={this.state.open} routes={routes} target="SideBar" />
+                <Sidebar collapsed={this.state.open} />
                 <MainPanel routes={routes} basePath={basePath}></MainPanel>
             </div>
         );

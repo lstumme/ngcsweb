@@ -11,6 +11,8 @@ import {
     ListItemIcon
 } from '@material-ui/core'
 
+import { withRoutes } from '../RoutesManager';
+
 const drawerWidth = 220;
 
 const styles = (theme) => ({
@@ -74,20 +76,18 @@ class Sidebar extends Component {
     }
 
     getRoutesDefinition() {
-        const { routes, target, classes } = this.props;
+        const { routes, classes } = this.props;
         console.log(routes);
         if (routes) {
             return routes.map((route, index) => {
-                if (route.target === target) {
-                    return (
-                        <Link to={route.layout + route.path} style={{ textDecoration: 'none' }} key={route.name}>
-                            <ListItem button key={route.name}>
-                                <ListItemIcon className={classes.icon}>{route.icon}</ListItemIcon>
-                                <ListItemText classes={{ primary: classes.icon }} primary={route.name} />
-                            </ListItem>
-                        </Link>
-                    )
-                }
+                return (
+                    <Link to={route.layout + route.path} style={{ textDecoration: 'none' }} key={route.name}>
+                        <ListItem button key={route.name}>
+                            <ListItemIcon className={classes.icon}>{route.icon}</ListItemIcon>
+                            <ListItemText classes={{ primary: classes.icon }} primary={route.name} />
+                        </ListItem>
+                    </Link>
+                )
             })
         }
     }
@@ -118,5 +118,4 @@ class Sidebar extends Component {
     };
 }
 
-
-export default withStyles(styles)(Sidebar);
+export default withRoutes('SideBar')(withStyles(styles)(Sidebar));

@@ -3,7 +3,8 @@ import {
     Login, 
     DefaultView, 
     HomeView,
-    UsersView
+    UsersView,
+    AccountView
 } from '../../views';
 
 const ngcsRoutes = [
@@ -70,6 +71,15 @@ const ngcsRoutes = [
         layout: '/ngcs',
         target: 'AppBar'
     },
+    {
+        path: '/newaccount',
+        name: 'Account',
+        icon: <Memory />,
+        component: <AccountView />,
+        layout: '/ngcs',
+        target: 'NewAccount'
+    },
+
 ];
 
 export default ngcsRoutes;
