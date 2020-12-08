@@ -9,8 +9,9 @@ import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as actions from '../../store/actions';
-
+import * as links from '../../components/RoutesManager/routelinks';
 const styles = theme => ({
     table: {
         minWidth: 600,
@@ -28,7 +29,7 @@ class UsersView extends Component {
         if (users) {
             return users.map(user => {
                 const firstname = user.firstname ? user.firstname : 'N/A';
-                const lastname = user.firstname ? user.firstname : 'N/A';
+                const lastname = user.lastname ? user.lastname : 'N/A';
                 const login = user.login;
                 const email = user.email;
                 return (
@@ -55,9 +56,11 @@ class UsersView extends Component {
             <div>
                 <h2 className='title-border'>Gestion des utilisateurs</h2>
                 <div>
-                    <Button color="secondary" variant="contained" style={{ marginBottom: 25, marginTop: 15 }}>Nouvel utilisateur</Button>
+                    <Link to={links.NEW_USER.layout + links.NEW_USER.path}>
+                        <Button color="secondary" variant="contained" style={{ marginBottom: 25, marginTop: 15 }}>Nouvel utilisateur</Button>
+                    </Link>
                     <TableContainer component={Paper}>
-                        <Table className={classes.table}>
+                        <Table className={classes.table} size="small">
                             <TableHead>
                                 <TableRow>
                                     <TableCell>Nom</TableCell>

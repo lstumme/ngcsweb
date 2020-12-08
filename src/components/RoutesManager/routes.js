@@ -1,11 +1,14 @@
-import { Home, Group, Build, Extension, PieChart, Memory } from '@material-ui/icons';
-import { 
-    Login, 
-    DefaultView, 
+import { Home, Group, Build, Extension, PieChart, Memory, Update } from '@material-ui/icons';
+import {
+    Login,
+    DefaultView,
     HomeView,
     UsersView,
-    AccountView
+    AccountView,
+    NewAccountView,
+    ChangeView
 } from '../../views';
+import * as links from './routelinks';
 
 const ngcsRoutes = [
     {
@@ -20,6 +23,14 @@ const ngcsRoutes = [
         name: 'Accueil',
         icon: <Home />,
         component: <HomeView />,
+        layout: '/ngcs',
+        target: 'SideBar'
+    },
+    {
+        path: '/changes',
+        name: 'Mises à jour',
+        icon: <Update />,
+        component: <ChangeView />,
         layout: '/ngcs',
         target: 'SideBar'
     },
@@ -79,7 +90,14 @@ const ngcsRoutes = [
         layout: '/ngcs',
         target: 'NewAccount'
     },
-
+    {
+        path: links.NEW_USER.path,
+        name: 'New User',
+        icon: null,
+        component: <NewAccountView/>,
+        layout: links.NEW_USER.layout,
+        target: null
+    }
 ];
 
 export default ngcsRoutes;

@@ -39,9 +39,9 @@ class MainPanel extends Component {
     }
 
     getFirstRoute() {
-        const {routes, basePath} = this.props;
-        for(let i = 0; i < routes.length; i++) {
-            if(routes[i].layout === basePath) {
+        const { routes, basePath } = this.props;
+        for (let i = 0; i < routes.length; i++) {
+            if (routes[i].layout === basePath) {
                 return routes[i].layout + routes[i].path;
             }
         }
@@ -54,11 +54,10 @@ class MainPanel extends Component {
                 <div className={classes.root}>
                     <Switch>
                         {this.getRoutes()}
-                        <Redirect from={basePath} to={this.getFirstRoute()}/>
+                        <Redirect from={basePath} to={this.getFirstRoute()} />
                     </Switch>
                 </div>
                 <footer className={classes.footer}>
-                    <hl></hl>
                     <span>
                         <Typography variant="subtitle2">
                             &copy; {1900 + new Date().getYear()}{" "}
